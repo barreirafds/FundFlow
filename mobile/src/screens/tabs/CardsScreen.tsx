@@ -304,7 +304,6 @@ export const CardsScreen = () => {
           </View>
         </Modal>
 
-        {/* Bottom Sheet para adicionar cartão */}
         <Modal
           visible={showAddCardSheet}
           animationType="slide"
@@ -314,7 +313,7 @@ export const CardsScreen = () => {
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.bottomSheetOverlay}>
               <View style={styles.bottomSheetContent}>
-                <Text style={styles.infoTitleElegant}>ADICIONAR CARTÃO</Text>
+                <Text style={styles.infoTitleElegant}>ADD CARD</Text>
                 <View style={styles.infoField}>
                   <Text style={styles.infoLabelElegant}>Number</Text>
                   <TextInput
