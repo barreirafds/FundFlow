@@ -21,7 +21,7 @@ export default function StatisticsScreen({ navigation }: any) {
 
   const categories = useMemo(() => {
     if (showZero) {
-      // Mostra as categorias mas tudo a 0
+      // Show categories but all set to 0
       const baseColors = ['#10B981', '#60A5FA', '#F59E0B', '#EF4444'];
       return [
         { label: 'Groceries', value: 0, color: baseColors[0] },

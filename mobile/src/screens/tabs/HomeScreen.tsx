@@ -55,7 +55,7 @@ const HomeScreen = ({ navigation }: { navigation: HomeScreenProps }) => {
   // Filter only real cards (exclude the "add" card)
   const realCards = cards.filter(card => !card.isAddCard);
 
-  // Se não houver cartões, mostrar objetivos a zero
+  // If there are no cards, show goals as zero
   const showZero = realCards.length === 0;
   const displayedGoals = showZero
     ? goalList.map(goal => ({ ...goal, current: 0, target: 0 }))

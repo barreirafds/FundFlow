@@ -367,7 +367,7 @@ export const CardsScreen = () => {
                   <Text style={styles.addButtonText}>Add card</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setShowAddCardSheet(false)} style={{ marginTop: 10 }}>
-                  <Text style={{ color: '#48BF73', fontWeight: 'bold' }}>Fechar</Text>
+                  <Text style={{ color: '#48BF73', fontWeight: 'bold' }}>Close</Text>
                 </TouchableOpacity>
               </View>
             </View>
