@@ -9,7 +9,8 @@ export async function registerUser(req, res) {
         }
 
         const emailRegex = /^[^@\s]+@[^@\s]+\.com$/i;
-        if (!emailRegex.test(email)) {
+        const repeatedCom = /\.com\.com$/i;
+        if (!emailRegex.test(email) || repeatedCom.test(email)) {
             return res.status(400).json({ message: "Invalid email format" });
         }
 

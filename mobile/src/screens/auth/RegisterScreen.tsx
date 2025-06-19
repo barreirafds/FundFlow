@@ -30,7 +30,8 @@ export const RegisterScreen = () => {
       return;
     }
     const emailRegex = /^[^@\s]+@[^@\s]+\.com$/i;
-    if (!emailRegex.test(email)) {
+    const repeatedCom = /\.com\.com$/i;
+    if (!emailRegex.test(email) || repeatedCom.test(email)) {
       Alert.alert('Error', 'Please enter a valid email');
       return;
     }
