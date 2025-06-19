@@ -9,6 +9,12 @@ const rl = readline.createInterface({
 const ask = (question) =>
   new Promise((resolve) => rl.question(question, resolve));
 
+const isValidEmail = (email) => {
+  const basic = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const repeated = /(\.[a-zA-Z]{2,})\1$/i;
+  return basic.test(email) && !repeated.test(email);
+};
+
 (async () => {
   try {
     console.log('\n Register a New User\n');

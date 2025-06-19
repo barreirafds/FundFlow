@@ -304,7 +304,6 @@ export const CardsScreen = () => {
           </View>
         </Modal>
 
-        {/* Bottom Sheet para adicionar cartão */}
         <Modal
           visible={showAddCardSheet}
           animationType="slide"
@@ -314,7 +313,7 @@ export const CardsScreen = () => {
           <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
             <View style={styles.bottomSheetOverlay}>
               <View style={styles.bottomSheetContent}>
-                <Text style={styles.infoTitleElegant}>ADICIONAR CARTÃO</Text>
+                <Text style={styles.infoTitleElegant}>ADD CARD</Text>
                 <View style={styles.infoField}>
                   <Text style={styles.infoLabelElegant}>Number</Text>
                   <TextInput
@@ -365,10 +364,10 @@ export const CardsScreen = () => {
                   </View>
                 </View>
                 <TouchableOpacity style={styles.addButton} onPress={() => { handleAddCard(); setShowAddCardSheet(false); }}>
-                  <Text style={styles.addButtonText}>Adicionar Cartão</Text>
+                  <Text style={styles.addButtonText}>Add card</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => setShowAddCardSheet(false)} style={{ marginTop: 10 }}>
-                  <Text style={{ color: '#48BF73', fontWeight: 'bold' }}>Fechar</Text>
+                  <Text style={{ color: '#48BF73', fontWeight: 'bold' }}>Close</Text>
                 </TouchableOpacity>
               </View>
             </View>
