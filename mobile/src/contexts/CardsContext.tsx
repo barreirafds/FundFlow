@@ -24,17 +24,6 @@ const CardsContext = createContext<CardsContextType | undefined>(undefined);
 
 const initialCards: Card[] = [
   {
-    id: '1',
-    cardNumber: '1234 1234 1234 1234',
-    holderName: 'Jonh Doe',
-    balance: '●●●●●●●●',
-    currency: 'AMD',
-    last4: '3567',
-    expiry: '02/25',
-    cvc: '123',
-    imageUrl: 'https://imgur.com/3u4JHkm.png',
-  },
-  {
     id: 'add',
     imageUrl: 'https://imgur.com/g68oGmZ.png',
     isAddCard: true,
