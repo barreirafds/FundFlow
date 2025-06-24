@@ -34,6 +34,7 @@ export const CardsScreen = () => {
   const [newCvc, setNewCvc] = useState('');
 
   const [showAddCardSheet, setShowAddCardSheet] = useState(false);
+  const [notificationsVisible, setNotificationsVisible] = useState(false);
 
   const handleMomentumScrollEnd = (event: any) => {
     const offsetX = event.nativeEvent.contentOffset.x;
@@ -148,6 +149,9 @@ export const CardsScreen = () => {
             <Ionicons name="person-outline" size={24} color="#FFFFFF" style={{ marginLeft: -5 }} />
             <Text style={styles.headerTitle}>MY CARDS</Text>
             <View style={styles.headerIcons}>
+              <TouchableOpacity onPress={() => setNotificationsVisible(true)}>
+                <Ionicons name="notifications-outline" size={24} color="#FFFFFF" />
+              </TouchableOpacity>
               {!card.isAddCard && (
                 <TouchableOpacity onPress={openManageModal} style={styles.manageButton}>
                   <Ionicons name="settings-outline" size={24} color="#FFFFFF" style={{ marginRight: -5 }} />
@@ -384,6 +388,25 @@ export const CardsScreen = () => {
           </TouchableWithoutFeedback>
         </KeyboardAvoidingView>
       </Modal>
+
+      {/* Notifications Modal */}
+      <Modal
+        visible={notificationsVisible}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setNotificationsVisible(false)}
+      >
+        <View style={styles.notificationsOverlay}>
+          <View style={styles.notificationsModal}>
+            <Ionicons name="notifications-off-circle-outline" size={60} color="#48BF73" style={{ marginBottom: 10 }} />
+            <Text style={styles.notificationsTitle}>No notifications</Text>
+            <Text style={styles.notificationsSubtitle}>You don't have any notifications yet. Check back later!</Text>
+            <TouchableOpacity style={styles.notificationsCloseButton} onPress={() => setNotificationsVisible(false)}>
+              <Text style={styles.notificationsCloseText}>Close</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Modal>
     </KeyboardAvoidingView>
   );
 };
@@ -619,5 +642,48 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     overflow: 'hidden',
     position: 'relative',
+  },
+  notificationsOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  notificationsModal: {
+    backgroundColor: '#232323',
+    borderRadius: 24,
+    padding: 32,
+    alignItems: 'center',
+    shadowColor: '#48BF73',
+    shadowOpacity: 0.25,
+    shadowRadius: 24,
+    elevation: 12,
+    minWidth: 280,
+  },
+  notificationsTitle: {
+    color: '#48BF73',
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  notificationsSubtitle: {
+    color: '#fff',
+    fontSize: 16,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  notificationsCloseButton: {
+    backgroundColor: '#48BF73',
+    borderRadius: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 32,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  notificationsCloseText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 }); 

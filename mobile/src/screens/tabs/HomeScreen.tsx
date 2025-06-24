@@ -111,6 +111,8 @@ const HomeScreen = ({ navigation }: { navigation: HomeScreenProps }) => {
     setGoalList(prev => prev.filter(g => g.id !== id));
   };
 
+  const [notificationsVisible, setNotificationsVisible] = useState(false);
+
   return (
     <View style={{ flex: 1 }}>
     <ScrollView style={styles.container}>
@@ -119,7 +121,9 @@ const HomeScreen = ({ navigation }: { navigation: HomeScreenProps }) => {
         <Ionicons name="person-outline" size={24} color="#FFFFFF" />
         <Text style={styles.headerTitle}>HOME</Text>
         <View style={styles.headerIcons}>
-          <Ionicons name="notifications-outline" size={24} color="#FFFFFF" />
+          <TouchableOpacity onPress={() => setNotificationsVisible(true)}>
+            <Ionicons name="notifications-outline" size={24} color="#FFFFFF" />
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -328,6 +332,25 @@ const HomeScreen = ({ navigation }: { navigation: HomeScreenProps }) => {
         </View>
       </Modal>
     )}
+
+    {/* Modal de Notificações */}
+    <Modal
+      visible={notificationsVisible}
+      transparent
+      animationType="fade"
+      onRequestClose={() => setNotificationsVisible(false)}
+    >
+      <View style={styles.notificationsOverlay}>
+        <View style={styles.notificationsModal}>
+          <Ionicons name="notifications-off-circle-outline" size={60} color="#48BF73" style={{ marginBottom: 10 }} />
+          <Text style={styles.notificationsTitle}>No notifications</Text>
+          <Text style={styles.notificationsSubtitle}>You don't have any notifications yet. Check back later!</Text>
+          <TouchableOpacity style={styles.notificationsCloseButton} onPress={() => setNotificationsVisible(false)}>
+            <Text style={styles.notificationsCloseText}>Close</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    </Modal>
     </View>
   );
 };
@@ -543,5 +566,48 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 14,
     fontWeight: '600',
+  },
+  notificationsOverlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  notificationsModal: {
+    backgroundColor: '#232323',
+    borderRadius: 24,
+    padding: 32,
+    alignItems: 'center',
+    shadowColor: '#48BF73',
+    shadowOpacity: 0.25,
+    shadowRadius: 24,
+    elevation: 12,
+    minWidth: 280,
+  },
+  notificationsTitle: {
+    color: '#48BF73',
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  notificationsSubtitle: {
+    color: '#fff',
+    fontSize: 16,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  notificationsCloseButton: {
+    backgroundColor: '#48BF73',
+    borderRadius: 12,
+    paddingVertical: 10,
+    paddingHorizontal: 32,
+    alignItems: 'center',
+    marginTop: 10,
+  },
+  notificationsCloseText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
