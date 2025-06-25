@@ -3,6 +3,8 @@ import { StyleSheet, View, Text, FlatList, Dimensions, TextInput, TouchableOpaci
 import CardItem from './CardItem';
 import { Ionicons } from '@expo/vector-icons';
 import { useCards } from '../../contexts/CardsContext';
+import { useNavigation } from '@react-navigation/native';
+import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 
 interface Card {
   id: string;
@@ -21,6 +23,14 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 const CARD_WIDTH = SCREEN_WIDTH - 30;
 const SNAP_INTERVAL = SCREEN_WIDTH;
 
+type TabParamList = {
+  Home: undefined;
+  Transactions: undefined;
+  Cards: undefined;
+  Statistics: undefined;
+  Profile: undefined;
+};
+
 export const CardsScreen = () => {
   const { cards, addCard, removeCard, updateCard } = useCards();
   const [selectedIndex, setSelectedIndex] = useState(0);
@@ -35,6 +45,8 @@ export const CardsScreen = () => {
 
   const [showAddCardSheet, setShowAddCardSheet] = useState(false);
   const [notificationsVisible, setNotificationsVisible] = useState(false);
+
+  const navigation = useNavigation<BottomTabNavigationProp<TabParamList, 'Cards'>>();
 
   const handleMomentumScrollEnd = (event: any) => {
     const offsetX = event.nativeEvent.contentOffset.x;
@@ -146,7 +158,9 @@ export const CardsScreen = () => {
       <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
         <View style={styles.innerContainer}>
           <View style={styles.header}>
-            <Ionicons name="person-outline" size={24} color="#FFFFFF" style={{ marginLeft: -5 }} />
+            <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+              <Ionicons name="person-outline" size={24} color="#FFFFFF" style={{ marginLeft: -5 }} />
+            </TouchableOpacity>
             <Text style={styles.headerTitle}>MY CARDS</Text>
             <View style={styles.headerIcons}>
               <TouchableOpacity onPress={() => setNotificationsVisible(true)}>

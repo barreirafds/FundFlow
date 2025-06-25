@@ -121,7 +121,9 @@ const HomeScreen = ({ navigation }: { navigation: HomeScreenProps }) => {
     <ScrollView style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Ionicons name="person-outline" size={24} color="#FFFFFF" />
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <Ionicons name="person-outline" size={24} color="#FFFFFF" />
+        </TouchableOpacity>
         <Text style={styles.headerTitle}>HOME</Text>
         <View style={styles.headerIcons}>
           <TouchableOpacity onPress={() => setNotificationsVisible(true)}>

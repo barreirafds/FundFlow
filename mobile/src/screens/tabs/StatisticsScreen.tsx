@@ -76,7 +76,9 @@ export default function StatisticsScreen({ navigation }: any) {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <Ionicons name="person-outline" size={24} color="#FFFFFF" style={{ marginLeft: -5 }} />
+        <TouchableOpacity onPress={() => navigation.navigate('Profile')}>
+          <Ionicons name="person-outline" size={24} color="#FFFFFF" style={{ marginLeft: -5 }} />
+        </TouchableOpacity>
         <Text style={styles.headerTitle}>STATISTICS</Text>
         <View style={styles.headerIcons}>
           <TouchableOpacity onPress={() => setNotificationsVisible(true)}>
