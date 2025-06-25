@@ -21,6 +21,7 @@ import { CardsProvider } from './src/contexts/CardsContext';
 import { AuthProvider } from './src/contexts/AuthContext';
 import * as SplashScreen from 'expo-splash-screen';
 import { useFonts } from 'expo-font';
+import { BudgetsProvider } from './src/contexts/BudgetsContext';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -104,32 +105,34 @@ export default function App() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <AuthProvider>
-        <CardsProvider>
-          <View style={styles.container} onLayout={onLayoutRootView}>
-            <NavigationContainer>
-            <Stack.Navigator screenOptions={{ 
-              headerShown: false,
-              gestureEnabled: false,
-              gestureDirection: 'horizontal',
-              animation: 'none'
-            }}>
-              <Stack.Screen name="Inicial" component={InicialScreen} />
-              <Stack.Screen name="Login" component={LoginScreen} />
-              <Stack.Screen name="Register" component={RegisterScreen} />
-              <Stack.Screen name="MainApp" component={TabNavigator} />
-              <Stack.Screen name='Budget' component={BudgetScreen}/>
-              <Stack.Screen name='Goals'  component={GoalScreen}/>
-              <Stack.Screen name='More'  component={MoreScreen}/>
-              <Stack.Screen
-                name='CategoryTransactions'
-                component={CategoryTransactionsScreen}
-              />
-            </Stack.Navigator>
-          </NavigationContainer>
-        </View>
-      </CardsProvider>
-      </AuthProvider>
+      <BudgetsProvider>
+        <AuthProvider>
+          <CardsProvider>
+            <View style={styles.container} onLayout={onLayoutRootView}>
+              <NavigationContainer>
+                <Stack.Navigator screenOptions={{ 
+                  headerShown: false,
+                  gestureEnabled: false,
+                  gestureDirection: 'horizontal',
+                  animation: 'none'
+                }}>
+                  <Stack.Screen name="Inicial" component={InicialScreen} />
+                  <Stack.Screen name="Login" component={LoginScreen} />
+                  <Stack.Screen name="Register" component={RegisterScreen} />
+                  <Stack.Screen name="MainApp" component={TabNavigator} />
+                  <Stack.Screen name='Budget' component={BudgetScreen}/>
+                  <Stack.Screen name='Goals'  component={GoalScreen}/>
+                  <Stack.Screen name='More'  component={MoreScreen}/>
+                  <Stack.Screen
+                    name='CategoryTransactions'
+                    component={CategoryTransactionsScreen}
+                  />
+                </Stack.Navigator>
+              </NavigationContainer>
+            </View>
+          </CardsProvider>
+        </AuthProvider>
+      </BudgetsProvider>
     </GestureHandlerRootView>
   );
 }

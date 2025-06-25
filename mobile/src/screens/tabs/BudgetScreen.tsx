@@ -12,9 +12,11 @@ import { Picker } from '@react-native-picker/picker';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
+import { useBudgets } from '../../contexts/BudgetsContext';
 
 export const BudgetScreen = () => {
   const navigation = useNavigation();
+  const { addBudget } = useBudgets();
   const [budgetName, setBudgetName] = useState('');
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('Food');
@@ -25,14 +27,14 @@ export const BudgetScreen = () => {
   const [showCategoryPicker, setShowCategoryPicker] = useState(false);
 
   const handleCreateBudget = () => {
-    const budgetData = {
-      budgetName,
-      amount,
+    addBudget({
+      name: budgetName,
+      amount: parseFloat(amount) || 0,
       category,
       recurrency,
       startDate,
-    };
-    console.log('Budget Created:', budgetData);
+    });
+    navigation.goBack();
   };
 
   return (

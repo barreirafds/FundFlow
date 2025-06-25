@@ -8,6 +8,7 @@ import CardItem from './CardItem';
 import { BottomTabNavigationProp } from '@react-navigation/bottom-tabs';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { CompositeNavigationProp } from '@react-navigation/native';
+import { useBudgets } from '../../contexts/BudgetsContext';
 
 // Define tab names and types
 type TabParamList = {
@@ -38,6 +39,7 @@ const SNAP_INTERVAL = SCREEN_WIDTH;
 // Main HomeScreen component
 const HomeScreen = ({ navigation }: { navigation: HomeScreenProps }) => {
   const { cards } = useCards();
+  const { budgets, removeBudget, updateBudget } = useBudgets();
   const [goalList, setGoalList] = useState<Goal[]>(initialGoals);
   const [selectedGoal, setSelectedGoal] = useState<Goal | null>(null);
   const [tempName, setTempName] = useState('');
@@ -112,6 +114,7 @@ const HomeScreen = ({ navigation }: { navigation: HomeScreenProps }) => {
   };
 
   const [notificationsVisible, setNotificationsVisible] = useState(false);
+  const [selectedSection, setSelectedSection] = useState<'goals' | 'budgets'>('goals');
 
   return (
     <View style={{ flex: 1 }}>
@@ -198,13 +201,43 @@ const HomeScreen = ({ navigation }: { navigation: HomeScreenProps }) => {
         </TouchableOpacity>
       </View>
 
-      {/* Goals Progress */}
+      {/* Goals/Budgets Switch */}
+      <View style={{ flexDirection: 'row', justifyContent: 'center', marginBottom: 10 }}>
+        <TouchableOpacity
+          style={{
+            backgroundColor: selectedSection === 'goals' ? '#66BB6A' : '#333',
+            paddingVertical: 8,
+            paddingHorizontal: 24,
+            borderTopLeftRadius: 12,
+            borderBottomLeftRadius: 12,
+          }}
+          onPress={() => setSelectedSection('goals')}
+        >
+          <Text style={{ color: '#fff', fontWeight: 'bold' }}>Goals</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: selectedSection === 'budgets' ? '#66BB6A' : '#333',
+            paddingVertical: 8,
+            paddingHorizontal: 24,
+            borderTopRightRadius: 12,
+            borderBottomRightRadius: 12,
+          }}
+          onPress={() => setSelectedSection('budgets')}
+        >
+          <Text style={{ color: '#fff', fontWeight: 'bold' }}>Budgets</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Goals Progress or Budgets Progress Section */}
       <View style={styles.goalsSection}>
         <View style={styles.transactionsHeader}>
-          <Text style={styles.transactionsTitle}>Goals Progress</Text>
+          <Text style={styles.transactionsTitle}>
+            {selectedSection === 'goals' ? 'Goals Progress' : 'Budgets Progress'}
+          </Text>
         </View>
 
-        {displayedGoals.map(goal => {
+        {selectedSection === 'goals' && displayedGoals.map(goal => {
           const progress = Math.min(goal.target === 0 ? 0 : goal.current / goal.target, 1);
           const completed = !showZero && progress >= 1;
           return (
@@ -240,6 +273,44 @@ const HomeScreen = ({ navigation }: { navigation: HomeScreenProps }) => {
                   {goal.current}€ / {goal.target}€
                 </Text>
               </TouchableOpacity>
+            </Swipeable>
+          );
+        })}
+
+        {selectedSection === 'budgets' && budgets.map(budget => {
+          const progress = Math.min(budget.amount === 0 ? 0 : budget.spent / budget.amount, 1);
+          const completed = progress >= 1;
+          return (
+            <Swipeable
+              key={budget.id}
+              renderRightActions={() => (
+                <TouchableOpacity
+                  style={[styles.swipeAction, styles.deleteSwipeAction]}
+                  onPress={() => removeBudget(budget.id)}
+                >
+                  <Ionicons name="trash-outline" size={24} color="#fff" />
+                </TouchableOpacity>
+              )}
+            >
+              <View style={[styles.goalItem, completed && styles.goalCompleted]}>
+                <View style={styles.goalHeader}>
+                  <Text style={styles.goalName}>{budget.name}</Text>
+                  {completed && (
+                    <Ionicons name="checkmark-circle" size={20} color="#66BB6A" />
+                  )}
+                </View>
+                <View style={styles.progressBar}>
+                  <View
+                    style={[styles.progressFill, { width: `${progress * 100}%` }]}
+                  />
+                </View>
+                <Text style={styles.goalAmount}>
+                  {budget.spent}€ / {budget.amount}€
+                </Text>
+                <Text style={{ color: 'gray', fontSize: 12, marginTop: 2 }}>
+                  Category: {budget.category} | Recurrency: {budget.recurrency}
+                </Text>
+              </View>
             </Swipeable>
           );
         })}
@@ -333,7 +404,7 @@ const HomeScreen = ({ navigation }: { navigation: HomeScreenProps }) => {
       </Modal>
     )}
 
-    {/* Modal de Notificações */}
+    {/* Notifications Modal */}
     <Modal
       visible={notificationsVisible}
       transparent
