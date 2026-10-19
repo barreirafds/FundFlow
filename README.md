@@ -1,79 +1,138 @@
+
+<div align="center">
+
 # 💸 FundFlow
 
-**FundFlow** is a modern, minimalistic budget tracking app built as part of a university group project. It allows users to manage their personal finances by tracking income, expenses, and savings with real-time updates and authentication. This project demonstrates the use of modern development tools in both frontend and backend environments while following professional software documentation and version control practices.
+### Personal Finance Management Application
 
-## 🚀 Project Overview
+A cross-platform mobile application designed to help users manage their income, expenses, and savings.
 
-FundFlow was developed to simplify personal financial management for users through a clean and intuitive mobile interface. The app offers features inspired by industry-leading apps such as Wise, with a clear focus on:
+**University Group Project | Fontys ICT**
 
-- 📈 Expense and income tracking  
-- 💰 Savings goal management  
-- 🔐 Secure account creation and login  
-- ⚡ Real-time updates and syncing
+</div>
 
-## 🧑‍💻 Technologies Used
+---
 
-### Frontend
-- **React Native** (Expo) — Cross-platform mobile development
-- **Clerk** — Authentication and session management
-- **Redis** — Real-time state management (planned)
-- **TailwindCSS (via NativeWind)** — Consistent and efficient styling
+## 📖 About the Project
 
-### Backend
-- **Node.js** — Runtime for building scalable server-side logic
-- **Express.js** — Web framework for routing and API design
-- **PostgreSQL** — Relational database for storing user and transaction data
-- **Neon** — Serverless PostgreSQL hosting
+FundFlow is a personal finance management application developed as part of a university group project at Fontys University of Applied Sciences.
 
-### Design
-- **Figma** — Used for UI prototyping with minimalist dark mode designs  
-- SF Pro font, green-to-gold gradients, rounded shapes, and custom UI components like pills, circles, segmented control bars
+The goal is to help users understand their financial activity and manage their budgets through an intuitive mobile interface.
 
-## 👥 Group Contribution
+The project combines mobile development, Back-End services, database management, and authentication.
 
-This was a collaborative project, where roles were divided for research, design, development, and documentation.
+---
 
-### Individual Role (Eduardo C.)
-- Built a modern UI design prototype in **Figma**, including:
-  - A customized **color palette** and **text style** collection
-  - Components like input forms, control panels, and navigation bars
-- Analyzed the **Wise app** for inspiration and prioritized features using the **MoSCoW method**
-- Created documentation and README structure
-- Responsible for integrating authentication via **Clerk** and backend setup using **Node.js** and **Express**
+## ✨ Project Features & Goals
 
-## 🔍 Features Under Development
+### Core Functionality
 
-- Dashboard for tracking weekly/monthly spending
-- Savings goal with progress bars
+- Income and expense tracking
+- Personal transaction management
+- User authentication and account management
+- Financial overview and budgeting
+
+### Features Under Development
+
+- Weekly and monthly spending dashboards
+- Savings goals and progress tracking
 - Custom notifications
-- Integration with real banking APIs (research phase)
+- Real-time data synchronization
+- Research into banking API integration
 
+> Some features are still under development or were explored during the research phase.
+
+---
+
+## 🛠️ Tech Stack
+
+| Category | Technologies |
+|---|---|
+| Mobile Development | React Native, Expo |
+| Language | JavaScript |
+| Back-End | Node.js, Express.js |
+| Database | PostgreSQL, Neon |
+| Authentication | Clerk |
+| Styling | NativeWind / Tailwind CSS |
+| UI/UX Design | Figma |
+| Version Control | Git, GitHub |
+
+**Additional Research:** Redis for real-time state management.
+
+---
+
+## 🏗️ Project Architecture
+
+FundFlow separates the mobile application from the Back-End.
+
+### Mobile Application
+
+`mobile/`
+
+Responsible for the user interface, navigation, authentication flow, and communication with the Back-End.
+
+### Back-End API
+
+`backend/`
+
+Provides server-side functionality and API endpoints for managing application data.
+
+### Database
+
+PostgreSQL hosted on Neon is used for relational data storage.
+
+### Authentication
+
+Clerk is used for authentication and session management.
+
+---
+
+## 📂 Repository Structure
+
+```text
+FundFlow/
+├── mobile/       # React Native / Expo app
+├── backend/      # Node.js / Express API
+└── README.md     # Project documentation
 ```
 
-## 🛠️ Installation
+---
 
-> This assumes Expo CLI is installed and PostgreSQL database is configured (Neon or local).
+## 🤝 Team Collaboration
+
+FundFlow was developed as a collaborative university project.
+
+The team worked on different aspects of the application, including:
+
+- Requirements analysis
+- UI/UX design and prototyping
+- Front-End development
+- Back-End development
+- Database integration
+- Technical research and documentation
+- Git-based collaboration
+
+The project provided experience working as part of a software development team.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js and npm
+- Expo Go or an Android/iOS emulator
+- PostgreSQL database
+- Required environment variables
+
+### 1. Clone the Repository
 
 ```bash
-# Clone the repository
-git clone https://github.com/YOUR_USERNAME/fundflow.git
-cd fundflow
-
-# Install dependencies
-npm install
-
-# Start the development server
-npx expo start
+git clone https://github.com/barreirafds/FundFlow.git
+cd FundFlow
 ```
 
-### Configure API URL
-
-Set the environment variable `EXPO_PUBLIC_API_URL` in `mobile/.env` to the URL of
-your running backend (e.g. `http://localhost:8080`). This is required so the
-mobile app can communicate with the Express server and the Neon PostgreSQL
-database.
-
-Backend setup (Express):
+### 2. Back-End Setup
 
 ```bash
 cd backend
@@ -81,19 +140,60 @@ npm install
 npm run dev
 ```
 
-## 📲 Expo Preview
+Configure the database connection and required environment variables before starting the server.
 
-This app runs on **Expo Go**. To preview on your phone:
+### 3. Mobile Application Setup
 
-1. Install **Expo Go** from App Store / Google Play.
-2. Run `npx expo start` and scan the QR code.
+Open another terminal:
 
-## ⚠️ Notes
+```bash
+cd mobile
+npm install
+npx expo start
+```
 
-- This app is a university project and **not intended for commercial or production use**.
-- Some packages may use outdated or deprecated methods for learning purposes.
-- No sensitive user data is stored or transmitted beyond the local environment.
+Configure the API URL in `mobile/.env`:
 
-## 📚 License
+```env
+EXPO_PUBLIC_API_URL=http://localhost:8080
+```
 
-This repository is licensed for **educational purposes**. No redistribution or commercial use is allowed without explicit permission.
+Replace the address with the appropriate reachable Back-End URL when testing on a physical device.
+
+### 4. Run the App
+
+Use Expo Go or an emulator to launch the application.
+
+> Never commit database passwords, authentication secrets, or other sensitive credentials.
+
+---
+
+## 🎨 UI/UX Design
+
+The interface was designed with a focus on simplicity, accessibility, and clear financial information.
+
+Figma was used for prototyping and exploring the application's visual identity and user experience.
+
+---
+
+## 🎓 Academic Context
+
+**University:** Fontys University of Applied Sciences  
+**Programme:** ICT — Software Development  
+**Project Type:** Group Academic Project
+
+---
+
+## 👨‍💻 Project Repository
+
+Maintained as a university group project.
+
+[GitHub Repository](https://github.com/barreirafds/FundFlow)
+
+---
+
+<div align="center">
+
+*Learning through collaboration, experimentation, and practical software development.*
+
+</div>
